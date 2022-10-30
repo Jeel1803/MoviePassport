@@ -25,7 +25,8 @@ func showMessage(msg: String, controller: UIViewController)
 class ViewController: UIViewController {
 
     
-    
+  
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var titleTextfield: UITextField!
     @IBOutlet weak var picView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -42,9 +43,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.isHidden = true
+        saveButton.isHidden = true
         // Do any additional setup after loading the view.
     }
-
+    
+   
 
     @IBAction func searchButton(_ sender: UIButton) {
         fetchData()
@@ -101,6 +104,7 @@ class ViewController: UIViewController {
                             self.picView.image = image
                             self.nameLabel.isHidden = false
                             self.nameLabel.text = name
+                            self.name = name
                             self.actor = actor
                             self.year = year
                             self.country = country
@@ -108,6 +112,7 @@ class ViewController: UIViewController {
                             self.rating = rating
                             self.type = type
                             self.language = language
+                            self.saveButton.isHidden = false
                         }
                     }
                 }
@@ -122,6 +127,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func saveButton(_ sender: UIButton) {
+        
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
         let movie = NSEntityDescription.insertNewObject(forEntityName: "Movie", into: context) as! Movie
